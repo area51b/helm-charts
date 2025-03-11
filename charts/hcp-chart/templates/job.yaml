@@ -1,0 +1,57 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hcp-job
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: hcp-container
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        env:
+        - name: CLUSTER_NAME
+          value: "{{ .Values.clusterName }}"
+        - name: RELEASE_IMAGE
+          value: "{{ .Values.releaseImage }}"
+        - name: NODE_POOL_REPLICAS
+          value: "{{ .Values.nodePoolReplicas }}"
+        - name: MEMORY
+          value: "{{ .Values.memory }}"
+        - name: CORES
+          value: "{{ .Values.cores }}"
+        - name: ETCD_STORAGE_CLASS
+          value: "{{ .Values.etcdStorageClass }}"
+        - name: HCP_URL
+          valueFrom:
+            configMapKeyRef:
+              name: hcp-config
+              key: hcp-url
+        - name: OC_CLI_URL
+          valueFrom:
+            configMapKeyRef:
+              name: hcp-config
+              key: oc-cli-url
+        - name: OC_LOGIN_URL
+          valueFrom:
+            secretKeyRef:
+              name: oc-login-secret
+              key: server
+        - name: OC_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: oc-login-secret
+              key: username
+        - name: OC_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: oc-login-secret
+              key: password
+        volumeMounts:
+        - name: pull-secret
+          mountPath: "/tmp/pull-secret.json"
+          subPath: "pullSecret"
+      volumes:
+      - name: pull-secret
+        secret:
+          secretName: pull-secret
