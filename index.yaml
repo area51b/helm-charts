@@ -2,6 +2,14 @@ apiVersion: v1
 entries:
   hcp-cluster-chart:
   - apiVersion: v2
+    created: "2025-03-21T08:25:56.716114559Z"
+    description: A Helm chart to deploy HCP cluster creation job
+    digest: 9c2b5ce0d7d1ff0ade947e83c423ca1a989f716ce913207c0a3afbef42e9767a
+    name: hcp-cluster-chart
+    urls:
+    - https://github.com/area51b/helm-charts/releases/download/hcp-cluster-chart-0.2.0/hcp-cluster-chart-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2025-03-11T10:11:53.623327649Z"
     description: A Helm chart to deploy HCP cluster creation job
     digest: 86092f0f144df04da05627a11b353aea268338b2fc83a25f7180ff6eae187db6
@@ -9,4 +17,4 @@ entries:
     urls:
     - https://github.com/area51b/helm-charts/releases/download/hcp-cluster-chart-0.1.0/hcp-cluster-chart-0.1.0.tgz
     version: 0.1.0
-generated: "2025-03-11T10:11:53.623333811Z"
+generated: "2025-03-21T08:25:56.716122634Z"
